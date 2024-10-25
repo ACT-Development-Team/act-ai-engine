@@ -6,7 +6,7 @@ load_dotenv()
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 def run():
-    inputs = {'APPL':'APPL'}
+    inputs = {'symbol':'Apple'}
     
     ACTAIEngine().crew().kickoff(inputs=inputs)
 

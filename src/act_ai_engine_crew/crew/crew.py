@@ -2,9 +2,12 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from langchain_groq import ChatGroq
 from act_ai_engine_crew.tools.coingecko_tool import CoinGeckoTool
-#from act_ai_engine_crew.tools.yahoo_finance_tool import YahooFinance
-from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
-#from act_ai_engine_crew.tools.yahoo_finance_tool_2 import YahooFinanceNewsTool
+from langchain_openai import ChatOpenAI
+from crewai_tools import WebsiteSearchTool
+import os
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 @CrewBase
 class ACTAIEngine():
@@ -13,8 +16,9 @@ class ACTAIEngine():
     tasks_config = '../config/tasks.yaml'
 
     def __init__(self) -> None:
-        self.groq_llm = ChatGroq(temperature=0, model_name="groq/mixtral-8x7b-32768")
-        self.yahoo_news_tool = YahooFinanceNewsTool()
+        self.groq_llm = ChatGroq(temperature=0, model_name="groq/mixtral-8x7b-32768"),
+        self.website = 'https://finance.yahoo.com'
+        self.openai_llm = ChatOpenAI(model_name="gpt-4o",temperature=0.8)
 
 
 #Agents 
@@ -22,29 +26,29 @@ class ACTAIEngine():
     def researcher(self) -> Agent:
         return Agent(
             config = self.agents_config['researcher'],
-            llm = self.groq_llm, #this will be changed to ChatGPT 
-            tools = [self.yahoo_news_tool] #not test yet
+            llm = self.openai_llm, #this will be changed to ChatGPT 
+            tools = [WebsiteSearchTool()] #not test yet
         )
-    
+        
     @agent
     def accountant(self) -> Agent:
         return Agent(
             config = self.agents_config['accountant'],
-            llm = self.groq_llm
+            llm = self.openai_llm
         )
     
     @agent
     def recommender(self) -> Agent:
         return Agent(
             config = self.agents_config['recommender'],
-            llm = self.groq_llm #this will be local ollama / tbd
+            llm = self.openai_llm #this will be local ollama / tbd
         )
     
     @agent
     def blogger(self) -> Agent:
         return Agent(
             config = self.agents_config['blogger'],
-            llm = self.groq_llm #this will be local ollama / mistral
+            llm = self.openai_llm #this will be local ollama / mistral
         )
     
 #Tasks 
