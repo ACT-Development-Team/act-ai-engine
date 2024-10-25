@@ -1,24 +1,24 @@
 research_stock_task:
   description: >
-    Use a search tool to look up this stock or cryptocurrency: {asset_name}.
+    Use a search tool to look up this stock or cryptocurrency: {APPL}.
     Gather key financial data including price, volume and recent perfromance. 
   expected_output: >
     All relevant financial data about the asset, including stock price, volume and performance. 
 
 accounting_task:
   description: >
-    Take the financial data of {asset_name} and perform a financial analysis using liquidity ratios, profitability ratios, growth metrics and valuation metrics.
-  expected: >
+    Take the financial data of {APPL} and perform a financial analysis using liquidity ratios, profitability ratios, growth metrics and valuation metrics.
+  expected_output: >
     A detailed financial analysis, including ratios and metrics that are necessery for evaluating the financial health of the asset. 
 
 recommendation_task: 
   description: >
-    Based on the analysis of {asset_name}, provide a buy, sell or hold recommendation. 
+    Based on the analysis of {APPL}, provide a buy, sell or hold recommendation. 
   expected_output: >
     A recommendation with justification, such as buy or sell, based on the calculated financial rations and metrics.
 
 blogging_task:
   description: >
-    Format the analysis and recommendation of {asset_name} into a final and readbale financial report. 
+    Format the analysis and recommendation of {APPL} into a final and readbale financial report. 
   expected_output: >
     A well structured and formatted financial report that includes the analysis, metrics and recommendation. 

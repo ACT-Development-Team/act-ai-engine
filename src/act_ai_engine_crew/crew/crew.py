@@ -1,17 +1,20 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from langchain_groq import ChatGroq
-import tools.coingecko_tool
-import tools.yahoo_finance_tool
+from act_ai_engine_crew.tools.coingecko_tool import CoinGeckoTool
+#from act_ai_engine_crew.tools.yahoo_finance_tool import YahooFinance
+from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
+#from act_ai_engine_crew.tools.yahoo_finance_tool_2 import YahooFinanceNewsTool
 
 @CrewBase
 class ACTAIEngine():
     """ACT AI Engine Crew"""
-    agents_config = 'config/agents.yaml'
-    tasks_config = 'config/tasks.yaml'
+    agents_config = '../config/agents.yaml'
+    tasks_config = '../config/tasks.yaml'
 
     def __init__(self) -> None:
-        self.groq_llm = ChatGroq(temperature=0, model_name="mixtral-8x7b-32768")
+        self.groq_llm = ChatGroq(temperature=0, model_name="groq/mixtral-8x7b-32768")
+        self.yahoo_news_tool = YahooFinanceNewsTool()
 
 
 #Agents 
@@ -20,7 +23,7 @@ class ACTAIEngine():
         return Agent(
             config = self.agents_config['researcher'],
             llm = self.groq_llm, #this will be changed to ChatGPT 
-            tools = [tools.coingecko_tool(), tools.yahoo_finance_tool()] #not test yet
+            tools = [self.yahoo_news_tool] #not test yet
         )
     
     @agent

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "act_ai_engine_crew"
+version = "0.1.0"
+description = "act_ai_engine_crew using crewAI"
+authors = ["ACT team"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = {extras = ["tools"], version = "^0.74.2"}
+langchain-groq = "^0.2.0"
+yfinance = "^0.2.46"
+
+[tool.poetry.scripts]
+act_ai_engine_crew = "act_ai_engine_crew.main:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 

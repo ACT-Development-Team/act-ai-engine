@@ -10,6 +10,8 @@ researcher:
 
 accountant: 
   role: >
+    Accountant
+  goal: >
     Perform financial calculations and analyze stock and crypto data using accounting ratios such as liquidity ratios, profitability ratios and growth metrics.
   backstory: >
     A highly experienced accountant who excels at calculating essential financial metrics to help make informed decisions. 
