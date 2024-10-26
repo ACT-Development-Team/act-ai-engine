@@ -27,7 +27,7 @@ class ACTAIEngine():
         return Agent(
             config = self.agents_config['researcher'],
             llm = self.openai_llm, #this will be changed to ChatGPT 
-            tools = [WebsiteSearchTool()] #not test yet
+            tools = [WebsiteSearchTool(self.website),CoinGeckoTool()] #not test yet
         )
         
     @agent
